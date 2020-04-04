@@ -1,0 +1,89 @@
+body {
+
+
+  background: darkgrey;
+  overflow-x: hidden;
+  height: 100%;
+  overflow: hidden;
+
+  
+  &:before, &:after {
+    display: block;
+    content: 'hi';
+    background: pink;
+    position: absolute;
+    width: 3000px;
+    height: 300px;
+    border-radius: 50%;
+    z-index: 0;
+  }
+  
+  &:before {
+    top: -100px;
+    left: -100px;
+  }
+  
+  &:after {
+    bottom: -50px;
+    right: -50px;
+  }
+}
+
+@keyframes wave {
+  from { transform: rotate(0deg);}
+  from { transform: rotate(360deg);}
+}
+
+h1 {
+    font-weight: 300;
+    color: black;
+    font-size: 2rem;
+    font-family: avenir, sans-serif;
+    color: #4A4A4A;
+}
+
+
+.outer {
+/*  overflow: hidden;
+  height:100%;*/
+}
+
+.wave {
+  height:100%;
+  width: 1050px;
+  height: 1025px;
+  position: absolute;
+  top: -25%;
+  left: 50%;
+  margin-left: -1300px;
+  margin-top: 700px;
+  border-radius: 35%;
+  background: rgba(255, 255, 255, .75);
+  animation: wave 150s infinite linear;
+}
+
+
+.wave2 {
+  height:100%;
+  width: 1050px;
+  height: 1025px;
+  position: absolute;
+  top: -25%;
+  left: 50%;
+  margin-left: 400px;
+  margin-top: -300px;
+  border-radius: 35%;
+  background: rgba(255, 255, 255, .75);
+  animation: wave 150s infinite linear;
+}
+
+textarea {
+  border: 5px solid #FFF; 
+  border-radius: 5%;
+}
+
+
+input {
+/*  border: 0px solid #888;
+  border-radius: 1%;*/
+}
