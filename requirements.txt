@@ -29,6 +29,6 @@ Twisted==20.3.0
 txaio==20.4.1
 zope.interface==5.0.2
 psycopg2
-wsgiref
+
 
 
