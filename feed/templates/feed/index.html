@@ -8,12 +8,19 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>Chat Rooms</title>
+    <title>*wave* Google</title>
 </head>
+
+
+<div id='content'>
+  {% load static %}
+  <center><img src="{% static 'feed/wavegoogle.png' %}" alt="My image" width="50%" height="25%">
+  <center><p style="font-size:25;font-family:Avenir";>welcome! please enter your device name</p><br><center></div>
+</div>
+
 <body>
-    Which device?<br/>
-    <input id="room-name-input" type="text" size="100"/><br/>
-    <input id="room-name-submit" type="button" value="Enter"/>
+    <center><input id="room-name-input" type="text" size="100"/><br/><br>
+    <center><input id="room-name-submit" type="button" value="Enter"/>
 
     <script>
         document.querySelector('#room-name-input').focus();

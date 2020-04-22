@@ -34,6 +34,9 @@
     <link rel="icon" href="{% static 'feed/favicon.ico' %}" type="image/x-icon"> 
     <title>Your Dashboard</title>
 </head>
+
+
+
 <body>
 
     <div class="outer"><div class="wave"></div></div>
@@ -41,19 +44,40 @@
 
 
     {% load static %}
-    <center><img src="{% static 'feed/wavegoogle.png' %}" alt="My image" width="20%" height="10%">
+    <center><img src="{% static 'feed/wavegoogle.png' %}" alt="My image" width="20%" height="10%"><br><br/>
+
+
+    <div class = "text" id="query" style="font-size:48pt;font-family:Roboto;"></div>
+
+    <div class = "text" id="response" style="font-size:24pt;font-family:Roboto"></div>
+    <br></br>
+
 
     <!-- <center><textarea style="font-size:36pt;font-family:Avenir" id="chat-log" cols="20" rows="1"></textarea><br/> -->
    <!--  <center><h1><span>hi welcome back!</span></h1> -->
-    <center><textarea style="font-size:12pt;font-family:Avenir" id="chat-log" cols="60" rows="25"></textarea><br/>
+    <textarea style="font-size:12pt;font-family:Roboto" id="chat-log" cols="60" rows="20"></textarea><br/>
 <!--     <poop><textarea style="font-size:10pt;font-family:Avenir" id="chat-log2" cols="50" rows="30"></textarea><br/>
  -->
-    <center><p style="font-size:10;font-family:Avenir";></p><br><center>
-    <center><input  id="chat-message-input" type="text" size="100"/><br/>
-    <center><p style="font-size:10;font-family:Avenir";></p><br><center>
-    <center><input id="chat-message-submit" type="button" size="20" value="help me google"/>
+    <p style="font-size:10;font-family:Roboto";></p><br><center>
+    <input  id="chat-message-input" type="text" size="100"/><br/>
+    <p style="font-size:10;font-family:Roboto";></p><br><center>
+    <input id="chat-message-submit" type="button" size="20" value="help me google"/>
+    <p style="font-size:10;font-family:Roboto";></p><center>
+    <input id="show-chat" type="button" size="20" value="toggle chat log"/>
+
+        </center>
 </body>
 <script>
+    var lastQuery = "Don't be shy. Wave to say hi!";
+    var lastResponse = "...";
+
+    document.getElementById("query").innerHTML = lastQuery;
+    document.getElementById("response").innerHTML = lastResponse;
+
+
+
+
+
     var roomName = "{{ room_name|escapejs }}";
 
     var chatSocket = new WebSocket(
@@ -66,15 +90,24 @@
         var message = data['message'];
 
         var query = data['query'];
-      
-
-
-        if (query == false) {
+    
+        if (query == true) {
+            if (message != "") {
+                document.querySelector('#chat-log').value += (" 🤔: " + message + '\n');
+                lastQuery = 'You just asked: "' + message +'"'
+                lastResponse = "..."
+            }
+        }
+        else { 
             document.querySelector('#chat-log').value += (" 🏠: " + message + '\n');
+            lastResponse = 'And we said: "' + message + '"'
         }
-        else {
-            document.querySelector('#chat-log').value += (" 🤔: " + message + '\n');
-        }
+
+        document.getElementById("query").innerHTML = lastQuery;
+        document.getElementById("response").innerHTML = lastResponse;
+
+
+
     };
 
     chatSocket.onclose = function(e) {
@@ -89,6 +122,7 @@
         }
     };
 
+
     document.querySelector('#chat-message-submit').onclick = function(e) {
         var messageInputDom = document.querySelector('#chat-message-input');
         var message = messageInputDom.value;
@@ -100,5 +134,39 @@
 
         messageInputDom.value = '';
     };
+
+    // var visible = true;
+    // document.getElementById("chat-log").style.visibility="visi";
+
+    document.getElementById('chat-log').style.display = "none";
+
+    document.querySelector('#show-chat').onclick = function(e) {
+        var showhide=document.getElementById('chat-log');
+
+        showhide.style.display = showhide.style.display === "none" ? 
+            "block" : 
+            "none";  
+
+        var showhide2=document.getElementById('query');
+        var showhide3 =document.getElementById('response');
+
+        showhide2.style.display = showhide2.style.display === "none" ? 
+            "block" : 
+            "none";  
+
+        showhide3.style.display = showhide3.style.display === "none" ? 
+            "block" : 
+            "none";  
+
+
+        // document.getElementById("response").innerHTML = "Chat history!";
+
+            
+        // else:
+        //     document.getElementById("chat-log").style.visibility="visible";
+        //     visible = true;
+  
+    };
+
 </script>
 </html>

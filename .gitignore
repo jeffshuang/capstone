@@ -5,3 +5,6 @@
 !.elasticbeanstalk/*.global.yml
 
 .DS_Store
+capstone_app 
+#venv
+__pycache__
