@@ -36,6 +36,9 @@ class FeedConsumer(AsyncWebsocketConsumer):
         if "sun" in message:
             message+=" ☀️"
 
+        if "alarm" in message.lower():
+            message+=" ⏰" 
+
         query = text_data_json['query']
 
         # Send message to room group

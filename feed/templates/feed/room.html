@@ -39,8 +39,10 @@
 
 <body>
 
-    <div class="outer"><div class="wave"></div></div>
-    <div class="outer"><div class="wave2"></div></div>
+    <div id="green-dot" class ="greendot"></div>
+    <div id="red-dot" class ="reddot"></div>
+    <div class="wave"></div></div>
+    <div class="wave2"></div></div>
 
 
     {% load static %}
@@ -65,11 +67,13 @@
     <p style="font-size:10;font-family:Roboto";></p><center>
     <input id="show-chat" type="button" size="20" value="toggle chat log"/>
 
-        </center>
+    </center>
 </body>
 <script>
     var lastQuery = "Don't be shy. Wave to say hi!";
     var lastResponse = "...";
+    var isListening = false;
+
 
     document.getElementById("query").innerHTML = lastQuery;
     document.getElementById("response").innerHTML = lastResponse;
@@ -89,13 +93,37 @@
 
         var message = data['message'];
 
+        if (message == "Ok Google") {
+            isListening = true;
+        }
+
+        if (message == "Stop") {
+            isListening = false;
+        }
+
+        if (isListening) {
+            document.getElementById('red-dot').style.display = "none";
+            document.getElementById('green-dot').style.display = "";
+        } else {
+            document.getElementById('green-dot').style.display = "none";
+            document.getElementById('red-dot').style.display = "";
+        }
+
         var query = data['query'];
     
         if (query == true) {
             if (message != "") {
-                document.querySelector('#chat-log').value += (" 🤔: " + message + '\n');
-                lastQuery = 'You just asked: "' + message +'"'
+                if (message == "Ok Google") {
+                lastQuery = "What would you like to know?"
                 lastResponse = "..."
+                } else if (message == "Stop") {
+                    var lastQuery = "Don't be shy. Wave to say hi!";
+                    var lastResponse = "...";
+                } else {
+                    document.querySelector('#chat-log').value += (" 🤔: " + message + '\n');
+                    lastQuery = 'You just asked: "' + message +'"'
+                    lastResponse = "..."
+                }
             }
         }
         else { 
