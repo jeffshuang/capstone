@@ -19,7 +19,7 @@ colorama==0.4.3
 constantly==15.1.0
 cryptography==2.9
 daphne==2.4.1
-Django==2.1.15
+Django==2.2.24
 docker==4.2.0
 docker-compose==1.25.5
 dockerpty==0.4.1
